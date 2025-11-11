@@ -37,7 +37,7 @@ public class TestBuggyAList {
               int randVal = StdRandom.uniform(0, 100);
               L.addLast(randVal);
               e_L.addLast(randVal);
-             
+
           } else if (operationNumber == 1) {
               // size
               int size = L.size();
