@@ -1,5 +1,5 @@
 package deque;
-class LinkedListDeque<T> implements Deque<T>{
+public class LinkedListDeque<T> implements Deque<T>{
     class Node {
         T data;
         Node next;

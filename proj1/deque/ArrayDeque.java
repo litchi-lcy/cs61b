@@ -1,7 +1,7 @@
 package deque;
 
 
-class ArrayDeque<T> implements Deque<T>{
+public class ArrayDeque<T> implements Deque<T>{
     T[] data ;
     int capacity = 8 ;
     int size = 0;
