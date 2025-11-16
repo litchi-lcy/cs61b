@@ -1,6 +1,6 @@
 package deque;
-
-public class LinkedListDeque<T> implements Deque<T>{
+import java.util.Iterator;
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     class Node {
         T data;
         Node next;
@@ -104,7 +104,7 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
 
-    public class Iterator<T> {
+    public class Iterator implements java.util.Iterator {
         Node first;
         public Iterator() {
             first = sentiment.next;
@@ -122,22 +122,22 @@ public class LinkedListDeque<T> implements Deque<T>{
         }
     }
 
-    public Iterator<T> iterator() {
-        return new Iterator<T>();
+    public Iterator iterator() {
+        return new Iterator();
     }
 
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         if(o instanceof Deque){
-            if(((LinkedListDeque<?>) o).size() == this.size){
+            if(((LinkedListDeque<?>) o).size() == this.size) {
                 LinkedListDeque<?> a = (LinkedListDeque<?>) o;
                 for(int i=0; i<this.size();i++){
                     Object item =  this.get(i);
                     Object item2 =  a.get(i);
-                    if( item ==  null && item2 == null){}
-                    else if(item == null || item2 == null){
+                    if( item ==  null && item2 == null) {}
+                    else if(item == null || item2 == null) {
                         return false;
                     }
-                    else if(!item.equals(item2)){
+                    else if(!item.equals(item2)) {
                         return false;
                     }
                 }

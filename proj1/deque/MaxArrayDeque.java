@@ -16,20 +16,20 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
 
         T maxx = this.get(0);
         for(int i = 1; i < this.size(); i++){
-            if(comparator.compare(maxx, this.get(i)) > 0){
+            if(comparator.compare(this.get(i),maxx) > 0) {
                 maxx = this.get(i);
             }
         }
         return maxx;
     }
 
-    public T max(Comparator<T> c){
+    private T max(Comparator<T> c){
         if(this.isEmpty()) {
             return null;
         }
         T maxx = this.get(0);
-        for(int i = 1; i < this.size(); i++){
-            if(c.compare(maxx, this.get(i)) > 0){
+        for(int i = 1; i < this.size(); i++) {
+            if(c.compare(this.get(i),maxx) > 0) {
                 maxx = this.get(i);
             }
         }
