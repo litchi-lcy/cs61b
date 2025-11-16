@@ -174,6 +174,77 @@ public class ArrayDequeTest {
 
         }
     }
+
+    @Test
+    public void testprint() {
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        LinkedListDeque<Integer> e_L = new LinkedListDeque<>();
+        int N = 5;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 2);
+            if (operationNumber == 0) {
+                int randVal = StdRandom.uniform(0, 10000);
+                L.addLast(randVal);
+                e_L.addLast(randVal);
+            }
+            else if (operationNumber == 1) {
+                int randVal = StdRandom.uniform(0, 10000);
+                L.addFirst(randVal);
+                e_L.addFirst(randVal);
+            }
+            L.printDeque();
+            System.out.println();
+            e_L.printDeque();
+            System.out.println();
+        }
+    }
+
+
+    @Test
+    public void IteratorTest() {
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        LinkedListDeque<Integer> e_L = new LinkedListDeque<>();
+        int N = 500;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 3);
+            if (operationNumber == 0) {
+                int randVal = StdRandom.uniform(0, 10000);
+                L.addLast(randVal);
+                e_L.addLast(randVal);
+            }
+            else if (operationNumber == 1) {
+                L.addFirst(operationNumber);
+                e_L.addFirst(operationNumber);
+            }
+        }
+        ArrayDeque.Iterator it = L.iterator();
+        LinkedListDeque.Iterator lit = e_L.iterator();
+        while (it.hasNext()) {
+            assertEquals(it.next(),lit.next());
+        }
+    }
+
+    @Test
+    public void equalsTest() {
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        LinkedListDeque<Integer> e_L = new LinkedListDeque<>();
+        int N = 5;
+        for (int i = 0; i < N; i += 1) {
+            int operationNumber = StdRandom.uniform(0, 2);
+            if (operationNumber == 0) {
+                int randVal = StdRandom.uniform(0, 10000);
+                L.addLast(randVal);
+                e_L.addLast(randVal);
+            }
+            else if (operationNumber == 1) {
+                int randVal = StdRandom.uniform(0, 10000);
+                L.addFirst(randVal);
+                e_L.addFirst(randVal);
+            }
+        }
+        assertEquals(true, L.equals(e_L));
+
+    }
 }
 
 

@@ -1,10 +1,10 @@
 package gh2;
 
 import deque.Deque;
+import deque.LinkedListDeque;
 import deque.LinkedListDequeTest;
 
-import java.util.ArrayDeque;
-// TODO: maybe more imports
+
 
 //Note: This file will not compile until you complete the Deque implementations
 public class GuitarString {
@@ -15,7 +15,7 @@ public class GuitarString {
     private static final double DECAY = .996; // energy decay factor
 
     /* Buffer for storing sound data. */
-    private ArrayDeque<Double> buffer ;
+    private Deque<Double> buffer ;
     /* Create a guitar string of the given frequency.  */
     public GuitarString(double frequency) {
         // TODO: Create a buffer with capacity = SR / frequency. You'll need to
@@ -24,7 +24,7 @@ public class GuitarString {
         //       Your should initially fill your buffer array with zeros.
         int capacity =(int) Math.round(SR / frequency);
         int i = 0;
-        buffer = new ArrayDeque<>();
+        buffer = new LinkedListDeque<Double>();
         while(i<capacity) {
             buffer.addFirst(0.0);
             i++;
@@ -62,7 +62,7 @@ public class GuitarString {
 
 
         double n1 = buffer.removeFirst();
-        double n2 = buffer.getFirst();
+        double n2 = buffer.get(0);
         double n3 = (n1 + n2)/ 2 * DECAY ;
         buffer.addLast(n3);
 
@@ -72,7 +72,7 @@ public class GuitarString {
     public double sample() {
         // TODO: Return the correct thing.
 
-        return buffer.getFirst();
+        return buffer.get(0);
     }
 }
     // TODO: Remove all comments that say TODO when you're done.

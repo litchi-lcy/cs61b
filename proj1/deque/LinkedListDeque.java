@@ -1,4 +1,5 @@
 package deque;
+
 public class LinkedListDeque<T> implements Deque<T>{
     class Node {
         T data;
@@ -87,6 +88,7 @@ public class LinkedListDeque<T> implements Deque<T>{
                 return current.data;
             }
             current = current.next;
+            i++;
         }
         return null;
     }
@@ -101,5 +103,48 @@ public class LinkedListDeque<T> implements Deque<T>{
         return getRecursive(index-1);
     }
 
+
+    public class Iterator<T> {
+        Node first;
+        public Iterator() {
+            first = sentiment.next;
+        }
+        public boolean hasNext() {
+            return first != sentiment;
+        }
+        public T next() {
+            if (first == sentiment) {
+                return null;
+            }
+            T item = (T) first.data;
+            first = first.next;
+            return item;
+        }
+    }
+
+    public Iterator<T> iterator() {
+        return new Iterator<T>();
+    }
+
+    public boolean equals(Object o){
+        if(o instanceof Deque){
+            if(((LinkedListDeque<?>) o).size() == this.size){
+                LinkedListDeque<?> a = (LinkedListDeque<?>) o;
+                for(int i=0; i<this.size();i++){
+                    Object item =  this.get(i);
+                    Object item2 =  a.get(i);
+                    if( item ==  null && item2 == null){}
+                    else if(item == null || item2 == null){
+                        return false;
+                    }
+                    else if(!item.equals(item2)){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

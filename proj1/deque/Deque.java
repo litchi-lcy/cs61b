@@ -13,4 +13,5 @@ public interface Deque<T> {
     default boolean isEmpty(){
         return size() == 0;
     }
+
 }

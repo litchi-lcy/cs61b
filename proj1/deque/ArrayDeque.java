@@ -17,6 +17,8 @@ public class ArrayDeque<T> implements Deque<T>{
         return size;
     }
 
+
+
     public void addFirst(T item){
         check_resize();
         if(size == 0 ){
@@ -104,9 +106,58 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     public void printDeque(){
-        for(int i = front; i != rear; i = (i + 1) % capacity){
-            System.out.print(data[i] + " ");
+
+        int k = 0;
+        int it = front;
+        while(k < size){
+            System.out.print(data[it] + " ");
+            it = (it + 1) % capacity;
+            k++;
         }
+    }
+
+    public class Iterator<T>{
+        int first;
+        int last;
+        public Iterator(){
+            first = front;
+            last = rear;
+        }
+        public boolean hasNext(){
+            return first != rear && size != 0;
+        }
+        public T next() {
+            T item = (T) data[first];
+            first = (first + 1) % capacity;
+
+            return item;
+        }
+    }
+
+    public Iterator<T> iterator(){
+        return new Iterator<T>();
+    }
+
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        if(o instanceof Deque){
+            if(size != ((Deque)o).size()){
+                return false;
+            }
+            int k = 0;
+            while(k<this.size()){
+                Object item = get(k);
+                Object item2 = ((Deque)o).get(k);
+                if(!item.equals(item2)){
+                    return false;
+                }
+                k++;
+            }
+            return true;
+        }
+        return false;
     }
 
 

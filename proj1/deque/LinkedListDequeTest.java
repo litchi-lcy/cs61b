@@ -1,6 +1,9 @@
 package deque;
 
 import org.junit.Test;
+
+import java.util.LinkedList;
+
 import static org.junit.Assert.*;
 
 
@@ -40,7 +43,6 @@ public class LinkedListDequeTest {
     /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
     public void addRemoveTest() {
 
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 		// should be empty
@@ -60,7 +62,6 @@ public class LinkedListDequeTest {
     /* Tests removing from an empty deque */
     public void removeEmptyTest() {
 
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
         lld1.addFirst(3);
@@ -102,7 +103,6 @@ public class LinkedListDequeTest {
     /* check if null is return when removing from an empty LinkedListDeque. */
     public void emptyNullReturnTest() {
 
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 
@@ -118,7 +118,6 @@ public class LinkedListDequeTest {
     /* Add large number of elements to deque; check if order is correct. */
     public void bigLLDequeTest() {
 
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
         for (int i = 0; i < 1000000; i++) {
@@ -135,4 +134,48 @@ public class LinkedListDequeTest {
 
 
     }
+
+    @Test
+    public void IteratorTest(){
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        for (int i = 0; i < 1000000; i++) {
+            lld1.addLast(i);
+        }
+        LinkedListDeque.Iterator it = lld1.iterator();
+        for (int i = 0; i < 1000000; i++) {
+            assertEquals(i,it.next());
+        }
+
+    }
+
+    @Test
+    public void equalsTest(){
+        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        for (int i = 0; i < 10; i++) {//如果是很大的数字 get要很久
+            lld1.addLast(i);
+        }
+        LinkedListDeque<Integer> lld2 = new LinkedListDeque<>();
+        for (int i = 0; i < 10; i++) {
+            lld2.addLast(i);
+        }
+        assertTrue(lld1.equals(lld2));
+
+        LinkedListDeque<Integer> lld3 = new LinkedListDeque<>();
+        for (int i = 0; i < 10; i++) {
+            lld3.addFirst(i);
+        }
+        assertFalse(lld1.equals(lld3));
+
+        LinkedListDeque<String> lld4 = new LinkedListDeque<>();
+        for (int i = 0; i < 10; i++) {
+            lld4.addFirst(",");
+        }
+        assertFalse(lld1.equals(lld4));
+    }
 }
+
+
+
+
+
+
