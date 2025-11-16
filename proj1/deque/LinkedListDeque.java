@@ -1,5 +1,6 @@
 package deque;
 import java.util.Iterator;
+
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private class Node {
         T data;
@@ -30,7 +31,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         Node a = new Node(value);
         a.next = sentiment;
         a.prev = sentiment.prev;
-        sentiment.prev.next=a;
+        sentiment.prev.next = a;
         sentiment.prev = a;
         size++;
     }
@@ -51,31 +52,31 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     public T removeFirst() {
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
         Node removed = sentiment.next;
         sentiment.next = sentiment.next.next;
-        sentiment.next.prev=sentiment;
+        sentiment.next.prev = sentiment;
         T data = removed.data;
-        removed.prev=null;
-        removed.next=null;
+        removed.prev = null;
+        removed.next = null;
         size--;
         return data;
     }
 
     public T removeLast() {
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
         Node removed = sentiment.prev;
 
-        sentiment.prev=sentiment.prev.prev;
+        sentiment.prev = sentiment.prev.prev;
         sentiment.prev.next=sentiment;
 
         T data = removed.data;
-        removed.prev=null;
-        removed.next=null;
+        removed.prev = null;
+        removed.next = null;
         size--;
         return data;
     }
@@ -83,7 +84,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     public T get(int index) {
         Node current = sentiment.next;
         int i = 0;
-        while (current != sentiment ) {
+        while (current != sentiment) {
             if (i == index) {
                 return current.data;
             }
@@ -97,20 +98,20 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        return helpgetRecursive(sentiment.next,index);
+        return helpgetRecursive(sentiment.next, index);
     }
 
-    public T helpgetRecursive(Node current,int index) {
+    private T helpgetRecursive(Node current, int index) {
         if (index == 0) {
             return current.data;
         }
-        return helpgetRecursive(current.next,index-1);
+        return helpgetRecursive(current.next, index - 1);
     }
 
 
     private class LIterator implements java.util.Iterator<T> {
         Node first;
-        public LIterator() {
+        LIterator() {
             first = sentiment.next;
         }
         public boolean hasNext() {
@@ -131,17 +132,20 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
         if (o instanceof Deque) {
             if (((Deque<?>) o).size() == this.size) {
                 Deque<?> d = (Deque<?>) o;
-                for (int i=0; i<this.size();i++) {
+                for (int i = 0; i < this.size(); i++) {
                     Object item =  this.get(i);
                     Object item2 =  d.get(i);
-                    if ( item ==  null && item2 == null) {
-
-                    } else if(item == null || item2 == null) {
+                    if (item ==  null && item2 == null) {
+                        continue;
+                    } else if (item == null || item2 == null) {
                         return false;
-                    } else if(!item.equals(item2)) {
+                    } else if (!item.equals(item2)) {
                         return false;
                     }
                 }

@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T> ,Iterable<T> {
     private T [] data;
     private int capacity = 8;
     private int size = 0;
@@ -22,18 +22,16 @@ public class ArrayDeque<T> implements Deque<T> {
 
     public void addFirst(T item) {
         checkResize();
-        if (size == 0 ) {
-            data[front] = item;
-        } else {
+        if (size != 0) {
             front = (front - 1 + capacity) % capacity;
-            data[front] = item;
         }
+        data[front] = item;
         size++;
     }
 
     public void addLast(T item) {
         checkResize();
-        if (size == 0 ) {
+        if (size == 0) {
             data[front] = item;
         } else {
             rear = (rear + 1) % capacity;
@@ -50,7 +48,7 @@ public class ArrayDeque<T> implements Deque<T> {
         data[front] = null;
         front = (front + 1) % capacity;
         size--;
-        if(size == 0 ) {
+        if (size == 0) {
             rear = front;
         }
         checkResize();
@@ -65,7 +63,7 @@ public class ArrayDeque<T> implements Deque<T> {
         data[rear] = null;
         rear = (rear - 1 + capacity) % capacity;
         size--;
-        if(size == 0 ) {
+        if(size == 0) {
             front = rear;
         }
         checkResize();
@@ -73,16 +71,16 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public T get(int index) {
-        return data[(front+index)%capacity];
+        return data[(front + index) % capacity];
     }
 
     private void resize(int newCapacity) {
         T[] newData = (T[]) new Object[newCapacity];
         int k = 0;
         int i = front;
-        while(k<size) {
+        while (k < size) {
             newData[k++] = data[i];
-            i = (i+1) % capacity;
+            i = (i + 1) % capacity;
         }
 
         data = newData;
@@ -92,14 +90,12 @@ public class ArrayDeque<T> implements Deque<T> {
 
     private void checkResize() {
 
-        if(size <= capacity / 4 && capacity > 8) {
+        if (size <= capacity / 4 && capacity > 8) {
 
             resize(size * 4);
             capacity = size * 4;
-        }
-        else if(size == capacity) {
-
-            resize(capacity*2);
+        } else if (size == capacity) {
+            resize(capacity * 2);
             capacity *= 2;
         }
     }
@@ -108,7 +104,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
         int k = 0;
         int it = front;
-        while(k < size) {
+        while (k < size) {
             System.out.print(data[it] + " ");
             it = (it + 1) % capacity;
             k++;
@@ -118,12 +114,12 @@ public class ArrayDeque<T> implements Deque<T> {
     private class AIterator implements java.util.Iterator<T> {
         int first;
         int counts;
-        public AIterator() {
+        AIterator() {
             first = front;
             counts = 0;
         }
         public boolean hasNext() {
-            return counts<size;
+            return counts < size;
         }
         public T next() {
             T item = (T) data[first];
@@ -138,21 +134,21 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     public boolean equals(Object o) {
-        if(o == this) {
+        if (o == this) {
             return true;
         }
-        if(o instanceof Deque) {
-            if(size != ((Deque)o).size()) {
+        if (o instanceof Deque) {
+            if (size != ((Deque) o).size()) {
                 return false;
             }
             int k = 0;
-            while(k<this.size()) {
+            while (k < this.size()) {
                 Object item = get(k);
-                Object item2 = ((Deque)o).get(k);
-                if(item == null && item2 == null) {
-                } else if(item == null || item2 != null) {
+                Object item2 = ((Deque) o).get(k);
+                if (item == null && item2 == null) continue;
+                if (item == null || item2 == null) {
                     return false;
-                } else if(!item.equals(item2)) {
+                } else if (!item.equals(item2)) {
                     return false;
                 }
                 k++;
