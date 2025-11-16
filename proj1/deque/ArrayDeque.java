@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> ,Iterable<T> {
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private T [] data;
     private int capacity = 8;
     private int size = 0;
@@ -63,7 +63,7 @@ public class ArrayDeque<T> implements Deque<T> ,Iterable<T> {
         data[rear] = null;
         rear = (rear - 1 + capacity) % capacity;
         size--;
-        if(size == 0) {
+        if (size == 0) {
             front = rear;
         }
         checkResize();
@@ -145,7 +145,9 @@ public class ArrayDeque<T> implements Deque<T> ,Iterable<T> {
             while (k < this.size()) {
                 Object item = get(k);
                 Object item2 = ((Deque) o).get(k);
-                if (item == null && item2 == null) continue;
+                if (item == null && item2 == null) {
+                    continue;
+                }
                 if (item == null || item2 == null) {
                     return false;
                 } else if (!item.equals(item2)) {

@@ -1,4 +1,5 @@
 package deque;
+
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
@@ -72,7 +73,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         Node removed = sentiment.prev;
 
         sentiment.prev = sentiment.prev.prev;
-        sentiment.prev.next=sentiment;
+        sentiment.prev.next = sentiment;
 
         T data = removed.data;
         removed.prev = null;

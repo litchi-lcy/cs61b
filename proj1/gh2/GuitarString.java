@@ -53,7 +53,7 @@ public class GuitarString {
 
         double n1 = buffer.removeFirst();
         double n2 = buffer.get(0);
-        double n3 = (n1 + n2) / 2 * DECAY ;
+        double n3 = (n1 + n2) / 2 * DECAY;
         buffer.addLast(n3);
 
     }
