@@ -1,18 +1,18 @@
 package deque;
 import java.util.Iterator;
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
-    class Node {
+    private class Node {
         T data;
         Node next;
         Node prev;
-        public Node(T data) {
+        private Node(T data) {
             this.data = data;
             this.next = this;
             this.prev = this;
         }
     }
-    Node sentiment;
-    int size;
+    private Node sentiment;
+    private int size;
     public LinkedListDeque() {
         size = 0;
         sentiment = new Node(null);
@@ -51,7 +51,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     public T removeFirst() {
-        if(size == 0){
+        if(size == 0) {
             return null;
         }
         Node removed = sentiment.next;
@@ -65,7 +65,7 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     public T removeLast() {
-        if(size == 0){
+        if(size == 0) {
             return null;
         }
         Node removed = sentiment.prev;
@@ -94,19 +94,23 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     }
 
     public T getRecursive(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             return null;
         }
-        if (index==0) {
-            return sentiment.data;
+        return helpgetRecursive(sentiment.next,index);
+    }
+
+    public T helpgetRecursive(Node current,int index) {
+        if (index == 0) {
+            return current.data;
         }
-        return getRecursive(index-1);
+        return helpgetRecursive(current.next,index-1);
     }
 
 
-    public class Iterator implements java.util.Iterator {
+    private class LIterator implements java.util.Iterator<T> {
         Node first;
-        public Iterator() {
+        public LIterator() {
             first = sentiment.next;
         }
         public boolean hasNext() {
@@ -122,22 +126,22 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         }
     }
 
-    public Iterator iterator() {
-        return new Iterator();
+    public Iterator<T> iterator() {
+        return new LIterator();
     }
 
     public boolean equals(Object o) {
-        if(o instanceof Deque){
-            if(((LinkedListDeque<?>) o).size() == this.size) {
-                LinkedListDeque<?> a = (LinkedListDeque<?>) o;
-                for(int i=0; i<this.size();i++){
+        if (o instanceof Deque) {
+            if (((Deque<?>) o).size() == this.size) {
+                Deque<?> d = (Deque<?>) o;
+                for (int i=0; i<this.size();i++) {
                     Object item =  this.get(i);
-                    Object item2 =  a.get(i);
-                    if( item ==  null && item2 == null) {}
-                    else if(item == null || item2 == null) {
+                    Object item2 =  d.get(i);
+                    if ( item ==  null && item2 == null) {
+
+                    } else if(item == null || item2 == null) {
                         return false;
-                    }
-                    else if(!item.equals(item2)) {
+                    } else if(!item.equals(item2)) {
                         return false;
                     }
                 }

@@ -1,6 +1,9 @@
 package deque;
 import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 public class ArrayDequeTest {
@@ -217,8 +220,8 @@ public class ArrayDequeTest {
                 e_L.addFirst(operationNumber);
             }
         }
-        ArrayDeque.Iterator it = L.iterator();
-        LinkedListDeque.Iterator lit = e_L.iterator();
+        Iterator it = L.iterator();
+        Iterator lit = e_L.iterator();
         while (it.hasNext()) {
             assertEquals(it.next(),lit.next());
         }
