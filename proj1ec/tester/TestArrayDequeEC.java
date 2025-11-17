@@ -62,7 +62,7 @@ public class TestArrayDequeEC {
             Integer sad11 = sad1.removeFirst();
             Integer sad22 = sad2.removeFirst();
             if (sad11 == sad22) {
-                message += "removeFirst(): " + sad11 + "\n";
+                message += "removeFirst()\n";
             } else {
                 message += "removeFirst(), " + "student was "+sad11 + ", correct was "+sad22 +"\n";
             }
@@ -72,7 +72,7 @@ public class TestArrayDequeEC {
             Integer sad11 = sad1.removeLast();
             Integer sad22 = sad2.removeLast();
             if (sad11 == sad22) {
-                message += "removeLast(): " + sad11 + "\n";
+                message += "removeLast()\n";
             } else {
                 message += "removeLast(), " + "student was "+sad11 + ", correct was "+sad22 +"\n";
             }
