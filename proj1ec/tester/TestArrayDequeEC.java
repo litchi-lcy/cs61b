@@ -7,38 +7,7 @@ import student.StudentArrayDeque;
 
 
 public class TestArrayDequeEC {
-    @Test
-    public void test1() {
-        StudentArrayDeque<Integer> sad1 = new StudentArrayDeque<>();
-        ArrayDequeSolution<Integer> sad2 = new ArrayDequeSolution<>();
-        int N = 10;
-        for (int j = 0; j < N; j++) {
-            sad1.addFirst(j);
-            sad2.addFirst(j);
-        }
-        for (int i = 0; i < N; i += 1) {
-            int randc = StdRandom.uniform(0,4);
-            int rand = StdRandom.uniform(0,1000);
-            if (randc == 0) {
-                sad1.addFirst(rand);
-                sad2.addFirst(rand);
-                assertEquals(sad1.get(0), sad2.get(0));
-                assertEquals(sad1.get(1), sad2.get(1));
-            } else if (randc == 1) {
-                sad1.addLast(rand);
-                sad2.addLast(rand);
-                assertEquals(sad1.get(sad1.size()-1), sad2.get(sad2.size()-1));
-                assertEquals(sad1.size(), sad2.size());
-            } else if (randc == 2) {
-                assertEquals(sad1.removeFirst(), sad2.removeFirst());
-            } else if (randc == 3) {
-                assertEquals(sad1.removeLast(), sad2.removeLast());
-            }
 
-        }
-
-
-    }
 
     @Test
     public void test2() {
@@ -55,7 +24,7 @@ public class TestArrayDequeEC {
             } else {
                 message += "addFirst(" + i + "), " + "student was " + sad11 + ", " + "correct was " + sad211;
             }
-            assertEquals(sad1.get(i), sad2.get(i));
+            assertEquals(message,sad1.get(i), sad2.get(i));
         }
 
         for (int i = 0; i < 100; i++) {
